@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materiālu Īpašību Salīdzinājums</title>
+    <title>Materiālu Īpašību Salīdzinājums - Pilns Konspekts</title>
     <style>
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
-            --accent-color: #e74c3c;
             --wood-color: #8B4513;
             --metal-color: #7f8c8d;
-            --light-color: #ecf0f1;
-            --dark-color: #34495e;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
             --border-radius: 8px;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -56,81 +55,90 @@
             padding: 0 1.5rem;
         }
         
-        .intro {
+        .toc {
             background-color: white;
             padding: 2rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             margin-bottom: 2rem;
-            text-align: center;
         }
         
-        .materials-grid {
+        .toc h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .toc a {
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .chapter {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .chapter h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .chapter h3 {
+            color: var(--wood-color);
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .metal h3 {
+            color: var(--metal-color);
+        }
+        
+        .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            margin: 1.5rem 0;
         }
         
-        .material-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-        }
-        
-        .material-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .wood-header {
-            background-color: var(--wood-color);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        
-        .metal-header {
-            background-color: var(--metal-color);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        
-        .material-content {
+        .property-card {
+            background-color: var(--light-color);
             padding: 1.5rem;
-        }
-        
-        .property {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .property-name {
-            font-weight: 600;
-            color: var(--dark-color);
-        }
-        
-        .property-value {
-            color: #555;
-        }
-        
-        .comparison-section {
-            background-color: white;
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .wood-card {
+            border-left-color: var(--wood-color);
+        }
+        
+        .metal-card {
+            border-left-color: var(--metal-color);
         }
         
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow);
         }
         
         .comparison-table th {
@@ -149,73 +157,43 @@
             background-color: #f9f9f9;
         }
         
+        .highlight {
+            background-color: #fff3cd;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid #ffc107;
+            margin: 1.5rem 0;
+        }
+        
+        .definition {
+            background-color: #e7f3ff;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+            margin: 1.5rem 0;
+        }
+        
         .rating {
             display: inline-block;
-            background-color: var(--secondary-color);
-            color: white;
             padding: 0.3rem 0.6rem;
             border-radius: 20px;
             font-size: 0.8rem;
-        }
-        
-        .high {
-            background-color: #2ecc71;
-        }
-        
-        .medium {
-            background-color: #f39c12;
-        }
-        
-        .low {
-            background-color: #e74c3c;
-        }
-        
-        .tabs {
-            display: flex;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .tab {
-            padding: 0.8rem 1.5rem;
-            cursor: pointer;
-            background-color: #f1f1f1;
-            border: none;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .tab.active {
-            background-color: white;
-            border-bottom: 3px solid var(--secondary-color);
             font-weight: bold;
         }
         
-        .tab-content {
-            display: none;
+        .high {
+            background-color: #d4edda;
+            color: #155724;
         }
         
-        .tab-content.active {
-            display: block;
+        .medium {
+            background-color: #fff3cd;
+            color: #856404;
         }
         
-        .wood-types, .metal-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .type-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-        }
-        
-        .type-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
+        .low {
+            background-color: #f8d7da;
+            color: #721c24;
         }
         
         footer {
@@ -227,7 +205,7 @@
         }
         
         @media (max-width: 768px) {
-            .materials-grid, .wood-types, .metal-types {
+            .property-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -235,312 +213,356 @@
                 display: block;
                 overflow-x: auto;
             }
-            
-            .tabs {
-                flex-direction: column;
-            }
-            
-            .tab {
-                width: 100%;
-                text-align: center;
-            }
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Materiālu Īpašību Salīdzinājums</h1>
-        <p class="subtitle">Pārskats par kokmateriālu un metālu īpašībām un to salīdzinājums</p>
+        <p class="subtitle">Pilns konspekts par kokmateriāliem un metāliem</p>
     </header>
     
     <div class="container">
-        <section class="intro">
-            <h2>Materiālu Īpašību Pārskats</h2>
-            <p>Šajā mājaslapā ir apkopoti materiālu īpašību dati no sniegtajiem dokumentiem. Zemāk varat apskatīt katra materiāla īpašības, kā arī to salīdzinājumu tabulā.</p>
+        <!-- Satura rādītājs -->
+        <section class="toc">
+            <h2>Satura Rādītājs</h2>
+            <ul>
+                <li><a href="#chapter1">1. Ievads materiālu klasifikācijā</a></li>
+                <li><a href="#chapter2">2. Kokmateriāli</a>
+                    <ul>
+                        <li><a href="#chapter2-1">2.1. Cietkoksnes</a></li>
+                        <li><a href="#chapter2-2">2.2. Skujkoksnes</a></li>
+                        <li><a href="#chapter2-3">2.3. Ražotās koka plātnes</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chapter3">3. Metāli</a>
+                    <ul>
+                        <li><a href="#chapter3-1">3.1. Melnie metāli</a></li>
+                        <li><a href="#chapter3-2">3.2. Krāsainie metāli</a></li>
+                        <li><a href="#chapter3-3">3.3. Metālu sakausējumi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chapter4">4. Materiālu salīdzinājums</a></li>
+                <li><a href="#chapter5">5. Materiālu izvēles kritēriji</a></li>
+            </ul>
         </section>
-        
-        <div class="tabs">
-            <button class="tab active" onclick="openTab(event, 'overview')">Pārskats</button>
-            <button class="tab" onclick="openTab(event, 'wood')">Kokmateriāli</button>
-            <button class="tab" onclick="openTab(event, 'metal')">Metāli</button>
-            <button class="tab" onclick="openTab(event, 'comparison')">Salīdzinājums</button>
-        </div>
-        
-        <div id="overview" class="tab-content active">
-            <section class="materials-grid">
-                <!-- Kokmateriāli -->
-                <div class="material-card">
-                    <div class="wood-header">
-                        <h3>Kokmateriāli</h3>
-                    </div>
-                    <div class="material-content">
-                        <div class="property">
-                            <span class="property-name">Stiprība</span>
-                            <span class="property-value">Atkarībā no veida</span>
-                        </div>
-                        <div class="property">
-                            <span class="property-name">Elastība</span>
-                            <span class="property-value">Vidēja līdz augsta</span>
-                        </div>
-                        <div class="property">
-                            <span class="property-name">Nodilumizturība</span>
-                            <span class="property-value">Atkarībā no veida</span>
-                        </div>
-                        <div class="property">
-                            <span class="property-name">Korozijas izturība</span>
-                            <span class="property-value">Vidēja</span>
-                        </div>
-                        <div class="property">
-                            <span class="property-name">Vadītspēja</span>
-                            <span class="property-value">Zema</span>
-                        </div>
-                    </div>
+
+        <!-- 1. nodaļa -->
+        <section id="chapter1" class="chapter">
+            <h2>1. Ievads materiālu klasifikācijā</h2>
+            <p>Materiālus dizaina un inženierijā iedala divās galvenajās kategorijās: kokmateriālos un metālos. Katrai kategorijai ir savas īpašības, priekšrocības un trūkumi, kas tos padara piemērotus dažādiem pielietojumiem.</p>
+            
+            <div class="definition">
+                <p><strong>Definīcija:</strong> Materiālu izvēle ir kritisks dizaina process, kas ietver dažādu faktoru izvērtēšanu, tostarp mehāniskās īpašības, izmaksas, apstrādājamību un estētiku.</p>
+            </div>
+        </section>
+
+        <!-- 2. nodaļa -->
+        <section id="chapter2" class="chapter">
+            <h2>2. Kokmateriāli</h2>
+            <p>Kokmateriālus iedala divās galvenajās grupās: <strong>cietkoksne</strong> (no platlapju kokiem) un <strong>skujkoksne</strong> (no skujkokiem). Šī iedalījuma pamatā ir bioloģiska klasifikācija, nevis materiāla cietība.</p>
+            
+            <div class="highlight">
+                <p><strong>Svarīgi:</strong> Koksnei kā dabiskam materiālam ir mainīga kvalitāte, ko ietekmē šķiedru raksts, augšanas defekti, mitruma saturs un citi faktori.</p>
+            </div>
+
+            <h3 id="chapter2-1">2.1. Cietkoksnes</h3>
+            <div class="property-grid">
+                <div class="property-card wood-card">
+                    <h4>Ozols</h4>
+                    <p><strong>Izcelsme:</strong> Eiropa un Ziemeļamerika</p>
+                    <p><strong>Blīvums:</strong> 720-790 kg/m³</p>
+                    <p><strong>Īpašības:</strong> Spēcīgs, izturīgs, izteiksmīgs graudu raksts</p>
+                    <p><strong>Pielietojums:</strong> Smagās konstrukcijas, mēbeles, grīdas segumi</p>
                 </div>
                 
-                <!-- Metāli -->
-                <div class="material-card">
-                    <div class="metal-header">
-                        <h3>Metāli</h3>
-                    </div>
-                    <div class="material-content">
-                        <div class="property">
-                            <span class="property-name">Stiprība</span>
-                            <span class="property-value">Augsta</span>
-                        </div>
-                        <div class="property">
-                            <span class="property-name">Elastība</span>
-                            <span class="property-value">Vidēja</span>
-                        </div>
-                        <div class="property">
-                            <span class="property-name">Nodilumizturība</span>
-                            <span class="property-value">Augsta</span>
-                        </div>
-                        <div class="property">
-                            <span class="property-name">Korozijas izturība</span>
-                            <span class="property-value">Atkarībā no veida</span>
-                        </div>
-                        <div class="property">
-                            <span class="property-name">Vadītspēja</span>
-                            <span class="property-value">Augsta</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        
-        <div id="wood" class="tab-content">
-            <section class="comparison-section">
-                <h2>Kokmateriāli</h2>
-                <p>Kokmateriālus iedala divās galvenajās grupās: <strong>cietkoksne</strong> (no platlapju kokiem) un <strong>skujkoksne</strong> (no skujkokiem).</p>
-                
-                <h3 style="margin-top: 1.5rem;">Cietkoksnes</h3>
-                <div class="wood-types">
-                    <div class="type-card">
-                        <h4>Ozols</h4>
-                        <p><strong>Izcelsme:</strong> Eiropa un Ziemeļamerika</p>
-                        <p><strong>Īpašības:</strong> Spēcīgs un izturīgs, blīvums 720-790 kg/m³</p>
-                        <p><strong>Pielietojums:</strong> Smagās konstrukcijās, mēbelēm, grīdas segumiem</p>
-                    </div>
-                    <div class="type-card">
-                        <h4>Dižskābardis</h4>
-                        <p><strong>Izcelsme:</strong> Eiropa, īpaši Centrāleiropa</p>
-                        <p><strong>Īpašības:</strong> Par 20% izturīgāks par ozoku, blīvums ~720 kg/m³</p>
-                        <p><strong>Pielietojums:</strong> Mēbelēm, darbgaldiem, virtuves piederumiem</p>
-                    </div>
-                    <div class="type-card">
-                        <h4>Tīkkoks</h4>
-                        <p><strong>Izcelsme:</strong> Mjanma, Indijas pussala</p>
-                        <p><strong>Īpašības:</strong> Izturīgs pret āra apstākļiem, blīvums ~660 kg/m³</p>
-                        <p><strong>Pielietojums:</strong> Mēbelēm, āra krēsliem un soliem</p>
-                    </div>
+                <div class="property-card wood-card">
+                    <h4>Dižskābardis</h4>
+                    <p><strong>Izcelsme:</strong> Centrāleiropa</p>
+                    <p><strong>Blīvums:</strong> ~720 kg/m³</p>
+                    <p><strong>Īpašības:</strong> Par 20% izturīgāks par ozoku, laba triecienizturība</p>
+                    <p><strong>Pielietojums:</strong> Mēbeles, darbgaldi, virtuves piederumi</p>
                 </div>
                 
-                <h3 style="margin-top: 1.5rem;">Skujkoksnes</h3>
-                <div class="wood-types">
-                    <div class="type-card">
-                        <h4>Priede</h4>
-                        <p><strong>Izcelsme:</strong> Apvienotā Karaliste, Ziemeļeiropa, Krievija</p>
-                        <p><strong>Īpašības:</strong> Samērā spēcīga un stingra, blīvums ~510 kg/m³</p>
-                        <p><strong>Pielietojums:</strong> Ārējai un iekšējai koka apdarei, konstrukcijām</p>
-                    </div>
-                    <div class="type-card">
-                        <h4>Egle</h4>
-                        <p><strong>Izcelsme:</strong> Eiropa un Kanāda</p>
-                        <p><strong>Īpašības:</strong> Mīksta, viegla, vidēji blīva, blīvums ~450 kg/m³</p>
-                        <p><strong>Pielietojums:</strong> Būvniecībai, iekštelpām un ārtelpām</p>
-                    </div>
-                    <div class="type-card">
-                        <h4>Baltegle</h4>
-                        <p><strong>Izcelsme:</strong> Centrāleiropa un Dienvideiropa</p>
-                        <p><strong>Īpašības:</strong> Mīksta, viegla, elastīga, blīvums ~530 kg/m³</p>
-                        <p><strong>Pielietojums:</strong> Celtniecības darbiem, logu un durvju izgatavošanai</p>
-                    </div>
+                <div class="property-card wood-card">
+                    <h4>Tīkkoks</h4>
+                    <p><strong>Izcelsme:</strong> Dienvidaustrumāzija</p>
+                    <p><strong>Blīvums:</strong> ~660 kg/m³</p>
+                    <p><strong>Īpašības:</strong> Izturīgs pret āra apstākļiem, liels sveku saturs</p>
+                    <p><strong>Pielietojums:</strong> Āra mēbeles, koka izstrādājumi</p>
+                </div>
+            </div>
+
+            <h3 id="chapter2-2">2.2. Skujkoksnes</h3>
+            <div class="property-grid">
+                <div class="property-card wood-card">
+                    <h4>Priede</h4>
+                    <p><strong>Izcelsme:</strong> Ziemeļu puslode</p>
+                    <p><strong>Blīvums:</strong> ~510 kg/m³</p>
+                    <p><strong>Īpašības:</strong> Samērā spēcīga, stingra, dažāda kvalitāte</p>
+                    <p><strong>Pielietojums:</strong> Ārējā un iekšējā apdare, konstrukcijas</p>
                 </div>
                 
-                <h3 style="margin-top: 1.5rem;">Ražotās koka plātnes</h3>
-                <p>Ražotās koka plātnes piedāvā vairākas priekšrocības salīdzinājumā ar dabīgajiem kokmateriāliem:</p>
-                <ul style="margin-top: 1rem; margin-left: 1.5rem;">
-                    <li>Pieejamas lielās loksnēs (1220 × 2440 mm)</li>
-                    <li>Izmēru ziņā stabilas (nesaraujas un neizplešas)</li>
-                    <li>Īpašības ir nemainīgas visā plātnes laukumā</li>
-                    <li>Videi draudzīgākas (izgatavotas no zemākas kvalitātes kokmateriāliem)</li>
-                </ul>
-            </section>
-        </div>
-        
-        <div id="metal" class="tab-content">
-            <section class="comparison-section">
-                <h2>Metāli</h2>
-                <p>Metālus iedala divās galvenajās grupās: <strong>melnie metāli</strong> (satur dzelzi) un <strong>krāsainie metāli</strong> (nesatur dzelzi).</p>
-                
-                <h3 style="margin-top: 1.5rem;">Melnie metāli</h3>
-                <div class="metal-types">
-                    <div class="type-card">
-                        <h4>Mazleģēts tērauds</h4>
-                        <p><strong>Sastāvs:</strong> Ogleklis (līdz 0,25%), mangāns, silīcijs</p>
-                        <p><strong>Īpašības:</strong> Izturīgs, plastisks, viegli metināms</p>
-                        <p><strong>Pielietojums:</strong> Vispārējas nozīmes inženiertehniskais materiāls</p>
-                    </div>
-                    <div class="type-card">
-                        <h4>Augstoglekļa tērauds</h4>
-                        <p><strong>Sastāvs:</strong> Ogleklis (0,60-1,00%), mangāns (0,30-0,90%)</p>
-                        <p><strong>Īpašības:</strong> Augsta nodilumizturība, trausls</p>
-                        <p><strong>Pielietojums:</strong> Griešanas instrumenti un asmeni</p>
-                    </div>
-                    <div class="type-card">
-                        <h4>Nerūsējošais tērauds</h4>
-                        <p><strong>Sastāvs:</strong> Dzelzs sakausējums ar vismaz 10,5% hroma</p>
-                        <p><strong>Īpašības:</strong> Izturīgs pret koroziju, elastīgs</p>
-                        <p><strong>Pielietojums:</strong> Virtuves piederumi, ierīces, medicīnas instrumenti</p>
-                    </div>
+                <div class="property-card wood-card">
+                    <h4>Egle</h4>
+                    <p><strong>Izcelsme:</strong> Eiropa un Kanāda</p>
+                    <p><strong>Blīvums:</strong> ~450 kg/m³</p>
+                    <p><strong>Īpašības:</strong> Mīksta, viegla, laba stiprība un elastība</p>
+                    <p><strong>Pielietojums:</strong> Būvniecība, iekštelpas un ārtelpas</p>
                 </div>
                 
-                <h3 style="margin-top: 1.5rem;">Krāsainie metāli</h3>
-                <div class="metal-types">
-                    <div class="type-card">
-                        <h4>Aluminijs</h4>
-                        <p><strong>Īpašības:</strong> Zems blīvums, izturīgs pret koroziju</p>
-                        <p><strong>Pielietojums:</strong> Aviācijas industrija, būvniecība, transports</p>
-                    </div>
-                    <div class="type-card">
-                        <h4>Varš</h4>
-                        <p><strong>Īpašības:</strong> Lieliska siltumvadītspēja, augsta elektrovadītspēja</p>
-                        <p><strong>Pielietojums:</strong> Santehnika, apkures ierīces, elektrotehnika</p>
-                    </div>
-                    <div class="type-card">
-                        <h4>Misipš</h4>
-                        <p><strong>Sastāvs:</strong> Vara un cinka sakausējums</p>
-                        <p><strong>Īpašības:</strong> Zema berze, dekoratīvs izskats</p>
-                        <p><strong>Pielietojums:</strong> Mūzikas instrumenti, santehnika, dekoratīvie elementi</p>
-                    </div>
+                <div class="property-card wood-card">
+                    <h4>Baltegle</h4>
+                    <p><strong>Izcelsme:</strong> Centrāleiropa</p>
+                    <p><strong>Blīvums:</strong> ~530 kg/m³</p>
+                    <p><strong>Īpašības:</strong> Elastīga, lokana, stabila pēc žāvēšanas</p>
+                    <p><strong>Pielietojums:</strong> Logi, durvis, iekšējās konstrukcijas</p>
                 </div>
-            </section>
-        </div>
-        
-        <div id="comparison" class="tab-content">
-            <section class="comparison-section">
-                <h2>Materiālu Salīdzinājums</h2>
-                <p>Salīdzinājuma tabula ļauj viegli salīdzināt dažādu materiālu īpašības:</p>
+            </div>
+
+            <h3 id="chapter2-3">2.3. Ražotās koka plātnes</h3>
+            <p>Ražotās koka plātnes piedāvā vairākas priekšrocības salīdzinājumā ar dabīgajiem kokmateriāliem:</p>
+            
+            <div class="property-grid">
+                <div class="property-card">
+                    <h4>Saplāksnis</h4>
+                    <p>Laminēta plātne no plāniem koka slāņiem (finieriem), kas sakārtoti šķiedru virzienā perpendikulāri viens otram. Nepāra slāņu skaits nodrošina līdzīgas īpašības visos virzienos.</p>
+                </div>
                 
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Īpašība</th>
-                            <th>Cietkoksne</th>
-                            <th>Skujkoksne</th>
-                            <th>Mazleģēts tērauds</th>
-                            <th>Aluminijs</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Stiprība</td>
-                            <td><span class="rating high">Augsta</span></td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                            <td><span class="rating high">Augsta</span></td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                        </tr>
-                        <tr>
-                            <td>Blīvums (kg/m³)</td>
-                            <td>660-790</td>
-                            <td>450-530</td>
-                            <td>7850</td>
-                            <td>2700</td>
-                        </tr>
-                        <tr>
-                            <td>Elastība</td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                            <td><span class="rating high">Augsta</span></td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                            <td><span class="rating high">Augsta</span></td>
-                        </tr>
-                        <tr>
-                            <td>Nodilumizturība</td>
-                            <td><span class="rating high">Augsta</span></td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                            <td><span class="rating high">Augsta</span></td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                        </tr>
-                        <tr>
-                            <td>Korozijas izturība</td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                            <td><span class="rating low">Zema</span></td>
-                            <td><span class="rating high">Augsta</span></td>
-                        </tr>
-                        <tr>
-                            <td>Vadītspēja</td>
-                            <td><span class="rating low">Zema</span></td>
-                            <td><span class="rating low">Zema</span></td>
-                            <td><span class="rating high">Augsta</span></td>
-                            <td><span class="rating high">Augsta</span></td>
-                        </tr>
-                        <tr>
-                            <td>Cena</td>
-                            <td><span class="rating high">Augsta</span></td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                            <td><span class="rating low">Zema</span></td>
-                            <td><span class="rating medium">Vidēja</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="property-card">
+                    <h4>MDF (Vidēji blīvās šķiedru plātnes)</h4>
+                    <p>Presētas koka šķiedras ar sintētiskiem sveķiem. Viendabīga struktūra, laba apstrādājamība.</p>
+                </div>
                 
-                <h3 style="margin-top: 2rem;">Prasme veikt pareizo izvēli</h3>
-                <p>Izvēloties materiālu konkrētam pielietojumam, jāņem vērā daudzi faktori:</p>
-                <ul style="margin-top: 1rem; margin-left: 1.5rem;">
-                    <li><strong>Īstermiņa fizikālās īpašības:</strong> izturība, stingrība, blīvums, cietība</li>
-                    <li><strong>Ilgtermiņa fizikālās īpašības:</strong> stabilitāte, piemērotība āra apstākļiem</li>
-                    <li><strong>Apstrādes īpašības:</strong> apstrādes vieglums, iespēja salīmēt</li>
-                    <li><strong>Estētiskās īpašības:</strong> krāsa, tekstūra, spīdums</li>
-                    <li><strong>Komerciālie faktori:</strong> izmaksas, pieejamība, konsistence</li>
-                </ul>
-            </section>
-        </div>
+                <div class="property-card">
+                    <h4>Skaidu plātnes</h4>
+                    <p>Koka skaidas, kas sajauktas ar līmi un presētas. Ekonomisks variants daudziem pielietojumiem.</p>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <p><strong>Priekšrocības:</strong> Lielas loksnes (1220×2440 mm), izmēru stabilitāte, nemainīgas īpašības, videi draudzīgākas (mazāk atkritumu).</p>
+            </div>
+        </section>
+
+        <!-- 3. nodaļa -->
+        <section id="chapter3" class="chapter metal">
+            <h2>3. Metāli</h2>
+            <p>Metālus iedala divās galvenajās grupās: <strong>melnie metāli</strong> (satur dzelzi) un <strong>krāsainie metāli</strong> (nesatur dzelzi).</p>
+
+            <h3 id="chapter3-1">3.1. Melnie metāli</h3>
+            <div class="property-grid">
+                <div class="property-card metal-card">
+                    <h4>Mazleģēts tērauds</h4>
+                    <p><strong>Sastāvs:</strong> Ogleklis (līdz 0,25%), mangāns, silīcijs</p>
+                    <p><strong>Blīvums:</strong> ~7,85 g/cm³</p>
+                    <p><strong>Īpašības:</strong> Izturīgs, plastisks, viegli metināms</p>
+                    <p><strong>Pielietojums:</strong> Vispārējas nozīmes inženiertehniskie materiāli</p>
+                </div>
+                
+                <div class="property-card metal-card">
+                    <h4>Augstoglekļa tērauds</h4>
+                    <p><strong>Sastāvs:</strong> Ogleklis (0,60-1,00%), mangāns (0,30-0,90%)</p>
+                    <p><strong>Īpašības:</strong> Augsta nodilumizturība, trausls</p>
+                    <p><strong>Pielietojums:</strong> Griešanas instrumenti, asmeņi</p>
+                </div>
+                
+                <div class="property-card metal-card">
+                    <h4>Nerūsējošais tērauds</h4>
+                    <p><strong>Sastāvs:</strong> Vismaz 10,5% hroma, veido oksīda aizsargslāni</p>
+                    <p><strong>Īpašības:</strong> Izturīgs pret koroziju, elastīgs</p>
+                    <p><strong>Pielietojums:</strong> Virtuves piederumi, medicīnas instrumenti</p>
+                </div>
+            </div>
+
+            <h3 id="chapter3-2">3.2. Krāsainie metāli</h3>
+            <div class="property-grid">
+                <div class="property-card metal-card">
+                    <h4>Aluminijs</h4>
+                    <p><strong>Īpašības:</strong> Zems blīvums (2700 kg/m³), izturīgs pret koroziju</p>
+                    <p><strong>Pielietojums:</strong> Aviācija, transports, būvniecība</p>
+                    <p><strong>Piezīme:</strong> Ražošanai nepieciešams daudz enerģijas, bet viegli pārstrādājams</p>
+                </div>
+                
+                <div class="property-card metal-card">
+                    <h4>Varš</h4>
+                    <p><strong>Īpašības:</strong> Lieliska siltumvadītspēja, augsta elektrovadītspēja</p>
+                    <p><strong>Pielietojums:</strong> Santehnika, elektrotehnika, apkures ierīces</p>
+                </div>
+                
+                <div class="property-card metal-card">
+                    <h4>Cinks</h4>
+                    <p><strong>Īpašības:</strong> "Altruistisks" metāls - upurē sevi citu metālu aizsardzībai</p>
+                    <p><strong>Pielietojums:</strong> Galvanizācija (tērauda pārklāšana)</p>
+                </div>
+            </div>
+
+            <h3 id="chapter3-3">3.3. Metālu sakausējumi</h3>
+            <div class="property-grid">
+                <div class="property-card metal-card">
+                    <h4>Misipš</h4>
+                    <p><strong>Sastāvs:</strong> Vara un cinka sakausējums</p>
+                    <p><strong>Īpašības:</strong> Zema berze, dekoratīvs izskats, laba apstrādājamība</p>
+                    <p><strong>Pielietojums:</strong> Mūzikas instrumenti, santehnika, dekoratīvie elementi</p>
+                </div>
+                
+                <div class="property-card metal-card">
+                    <h4>Bronza</h4>
+                    <p><strong>Sastāvs:</strong> Vara un alvas sakausējums (arī ar citiem elementiem)</p>
+                    <p><strong>Īpašības:</strong> Cietāks par varu, laba nodilumizturība</p>
+                    <p><strong>Pielietojums:</strong> Elektrotehnika, gultņi, mehānismu sastāvdaļas</p>
+                </div>
+                
+                <div class="property-card metal-card">
+                    <h4>Volframs</h4>
+                    <p><strong>Īpašības:</strong> Ļoti blīvs (19,3 g/cm³), augsta kušanas temperatūra (3422°C)</p>
+                    <p><strong>Pielietojums:</strong> Griezējinstrumenti, kvēldiegu spuldzes</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. nodaļa -->
+        <section id="chapter4" class="chapter">
+            <h2>4. Materiālu salīdzinājums</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Īpašība</th>
+                        <th>Cietkoksne</th>
+                        <th>Skujkoksne</th>
+                        <th>Mazleģēts tērauds</th>
+                        <th>Aluminijs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Stiprība</td>
+                        <td><span class="rating high">Augsta</span></td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                        <td><span class="rating high">Augsta</span></td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                    </tr>
+                    <tr>
+                        <td>Blīvums (kg/m³)</td>
+                        <td>660-790</td>
+                        <td>450-530</td>
+                        <td>7850</td>
+                        <td>2700</td>
+                    </tr>
+                    <tr>
+                        <td>Elastība</td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                        <td><span class="rating high">Augsta</span></td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                        <td><span class="rating high">Augsta</span></td>
+                    </tr>
+                    <tr>
+                        <td>Nodilumizturība</td>
+                        <td><span class="rating high">Augsta</span></td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                        <td><span class="rating high">Augsta</span></td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                    </tr>
+                    <tr>
+                        <td>Korozijas izturība</td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                        <td><span class="rating low">Zema</span></td>
+                        <td><span class="rating high">Augsta</span></td>
+                    </tr>
+                    <tr>
+                        <td>Vadītspēja</td>
+                        <td><span class="rating low">Zema</span></td>
+                        <td><span class="rating low">Zema</span></td>
+                        <td><span class="rating high">Augsta</span></td>
+                        <td><span class="rating high">Augsta</span></td>
+                    </tr>
+                    <tr>
+                        <td>Cena</td>
+                        <td><span class="rating high">Augsta</span></td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                        <td><span class="rating low">Zema</span></td>
+                        <td><span class="rating medium">Vidēja</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 5. nodaļa -->
+        <section id="chapter5" class="chapter">
+            <h2>5. Materiālu izvēles kritēriji</h2>
+            
+            <div class="property-grid">
+                <div class="property-card">
+                    <h4>Īstermiņa fizikālās īpašības</h4>
+                    <ul>
+                        <li>Izturība (lieces, stiepes, saspiešanas, bīdes)</li>
+                        <li>Stingrība un elastība</li>
+                        <li>Blīvums un cietība</li>
+                        <li>Triecienizturība</li>
+                    </ul>
+                </div>
+                
+                <div class="property-card">
+                    <h4>Ilgtermiņa fizikālās īpašības</h4>
+                    <ul>
+                        <li>Stabilitāte (saraušanās/izplešanās)</li>
+                        <li>Izturība pret āra apstākļiem</li>
+                        <li>Izturība pret ķīmiskām vielām</li>
+                        <li>Nodilumizturība</li>
+                    </ul>
+                </div>
+                
+                <div class="property-card">
+                    <h4>Apstrādes īpašības</h4>
+                    <ul>
+                        <li>Apstrādes vieglums</li>
+                        <li>Līmējamība</li>
+                        <li>Metināmība</li>
+                        <li>Apdares iespējas</li>
+                    </ul>
+                </div>
+                
+                <div class="property-card">
+                    <h4>Estētiskās īpašības</h4>
+                    <ul>
+                        <li>Krāsa un tekstūra</li>
+                        <li>Spīdums un virsmas kvalitāte</li>
+                        <li>Dekoratīvās iespējas</li>
+                    </ul>
+                </div>
+                
+                <div class="property-card">
+                    <h4>Komerciālie faktori</h4>
+                    <ul>
+                        <li>Izmaksas</li>
+                        <li>Pieejamība</li>
+                        <li>Konsistence</li>
+                        <li>Zudumi ražošanas laikā</li>
+                    </ul>
+                </div>
+                
+                <div class="property-card">
+                    <h4>Vides aspekti</h4>
+                    <ul>
+                        <li>Pārstrādājamība</li>
+                        <li>Enerģijas patēriņš ražošanā</li>
+                        <li>Ilgmūžība</li>
+                        <li>Ietekme uz vidi</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <p><strong>Praktisks padoms:</strong> Veicot materiāla izvēli, vienmēr jāņem vērā produkta galīgais pielietojums, paredzamais kalpošanas laiks un apkopes prasības. Labākais materiāls ir tas, kas vislabāk atbilst konkrētajam mērķim.</p>
+            </div>
+        </section>
     </div>
     
     <footer>
-        <p>Materiālu īpašību salīdzinājums &copy; 2023</p>
+        <p>Materiālu īpašību salīdzinājums - Pilns konspekts &copy; 2023</p>
         <p>Dati balstīti uz sniegtajiem dokumentiem</p>
     </footer>
-    
-    <script>
-        function openTab(evt, tabName) {
-            // Paslēpt visus tabus
-            var tabcontent = document.getElementsByClassName("tab-content");
-            for (var i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-            }
-            
-            // Noņemt aktīvo klasi no visām cilnēm
-            var tabs = document.getElementsByClassName("tab");
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove("active");
-            }
-            
-            // Parādīt atlasīto tabu un padarīt to aktīvu
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
-    </script>
 </body>
 </html>
